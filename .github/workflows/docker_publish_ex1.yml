@@ -21,7 +21,7 @@ jobs:
                 registry: ghcr.io               # 컨테이너 레지스트리의 호스트명
                 username: ${{github.actor}}     # 컨테이너 레지스트리의 로그인 ID
                 password: ${{secrets.GITHUB_TOKEN}} # 컨테이너 레지스트리의 로그인 패스워드
-            - uses: docker/metadata-action@v5   # 컨테이너 이미지 메타데이터 생성
+            - uses: docker/metadata-action@v6   # 컨테이너 이미지 메타데이터 생성
               id: meta
               with:                             # 이미지명은 컨테이너 레지스트리의 명명 규칙을 따름
                 images: ghcr.io/${{github.repository_owner}}/${{env.IMAGE_NAME}}
