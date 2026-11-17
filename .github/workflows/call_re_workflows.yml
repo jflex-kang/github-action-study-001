@@ -1,0 +1,19 @@
+name: Call reusable workflows
+on: pull_request
+jobs:
+    call:
+        uses: ./.github/workflows/reusable_workflows.yml        # 리유저블 워크플로 지정
+        with:                                                   # 텍스트 입력 파라미터 지정
+            pr-number: ${{github.event.pull_request.number}}
+        secrets:                                                # 시크릿 입력 파라미터 지정
+            token: ${{secrets.GITHUB_TOKEN}}
+        permissions:
+            contents: read
+            pull-requests: write
+    print:
+        needs: [call]
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "Result> ${MESSAGE}"
+              env:
+                MESSAGE: ${{needs.call.outputs.message}}        # 출력값 참조

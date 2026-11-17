@@ -1,0 +1,12 @@
+name: Container image scan (trivy)
+on: pull_request
+jobs:
+    scan:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: aquasecurity/trivy-action@0.19.0        # Trivy 실행
+              with:
+                image-ref: nginx:1.11.0                     # 스캔 대상 컨테이너 이미지
+                severity: CRITICAL, HIGH                    # 리포트 대상의 중요도
+                exit-code: 1                                # 문제 발견 시의 종료 상태
+

@@ -1,0 +1,12 @@
+name: SAST(static application security testing) for python
+on: pull_request
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              with:
+                python-version: 3.x
+            - run: pip install bandit           # bandit 설치
+            - run: bandit -r .                  # bandit으로 파이썬 코드 스캔
