@@ -16,7 +16,7 @@ jobs:
             contents: read                      # 소스 코드 체크아웃 허가
         steps:
             - uses: actions/checkout@v4
-            - uses: docker/login-action@v3      # 컨테이너 레지스트리 로그인
+            - uses: docker/login-action@v4      # 컨테이너 레지스트리 로그인
               with:
                 registry: ghcr.io               # 컨테이너 레지스트리의 호스트명
                 username: ${{github.actor}}     # 컨테이너 레지스트리의 로그인 ID
