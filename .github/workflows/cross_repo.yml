@@ -1,0 +1,20 @@
+name: cross repo
+on: push
+env:
+    TARGET_REPO: git-practice-001                          # 깃허브 앱 설치 시 설정한 리포지터리
+jobs:
+    checkout:
+        runs-on: ubuntu-latest
+        steps:
+            - id: create                                    # 깃허브 앱 토큰 생성
+              uses: actions/create-github-app-token@v1
+              with:
+                app-id: ${{secrets.APP_ID}}                 # 깃허브 앱의 App ID
+                private-key: ${{secrets.PRIVATE_KEY}}       # 깃허브 앱의 비밀 키
+                repositories: ${{env.TARGET_REPO}}          # 접근을 허가하는 리포지터리
+            - uses: actions/checkout@v4                     # 다른 리포지터리 체크아웃
+              with:
+                repository: ${{github.repository_owner}}/${{env.TARGET_REPO}}
+                path: ${{env.TARGET_REPO}}
+                token: ${{steps.create.outputs.token}}      # 생성한 깃허브 앱 토큰
+            - run: cat "${TARGET_REPO}/README.md"           # 다른 리포지터리의 README 표시
