@@ -4,7 +4,7 @@ jobs:
     scan:
         runs-on: ubuntu-latest
         steps:
-            - uses: aquasecurity/trivy-action@0.19.0        # Trivy 실행
+            - uses: aquasecurity/trivy-action@v0.36.0        # Trivy 실행
               with:
                 image-ref: nginx:1.11.0                     # 스캔 대상 컨테이너 이미지
                 severity: CRITICAL, HIGH                    # 리포트 대상의 중요도
